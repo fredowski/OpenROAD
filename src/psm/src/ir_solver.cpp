@@ -1120,7 +1120,7 @@ void IRSolver::solve(sta::Scene* corner,
   addSourcesToMatrixAndVoltages(
       src_voltage, src_nodes, node_index, g_matrix, j_vector);
 
-  Eigen::SparseLU<Eigen::SparseMatrix<Connection::Conductance>> eigen_solver;
+  Eigen::SimplicialLDLT<Eigen::SparseMatrix<Connection::Conductance>> eigen_solver;
 
   debugPrint(logger_, utl::PSM, "solve", 1, "Factorizing the G matrix");
   eigen_solver.compute(g_matrix);
@@ -1134,8 +1134,7 @@ void IRSolver::solve(sta::Scene* corner,
     logger_->error(
         utl::PSM,
         10,
-        "LU factorization of the G Matrix failed. SparseLU solver message: {}.",
-        eigen_solver.lastErrorMessage());
+        "LDLT factorization of the G Matrix failed.");
   }
 
   debugPrint(logger_, utl::PSM, "solve", 1, "Solving system of equations GV=J");
