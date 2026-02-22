@@ -90,10 +90,9 @@ git_override(
 # allow openroad to link, but will search on the system at runtime for
 # the correct system libs.
 bazel_dep(name = "qt-bazel")
-git_override(
+local_path_override(
     module_name = "qt-bazel",
-    commit = "e1d5b0b4725d045a03d18e02c54bdebe73d07384",
-    remote = "https://github.com/The-OpenROAD-Project/qt_bazel_prebuilts",
+    path = "/Users/fritz/qt_bazel_prebuilts",
 )
 
 # Updated dependencies of qt_bazel_prebuilts. Once the updated versions
